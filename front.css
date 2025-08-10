@@ -1,0 +1,68 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #000;
+    color: white;
+    overflow: hidden;
+}
+
+/* Intro overlay */
+#intro {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    transition: opacity 1s ease;
+    z-index: 10;
+}
+
+#company-name {
+    font-size: 3rem;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: white;
+    opacity: 1;
+    animation: fadeIn 1s ease forwards;
+    position: relative;
+    z-index: 2;
+}
+
+/* Container for press enter */
+#press-container {
+    position: absolute;
+    top: 70%; /* Lower on screen */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#press-enter {
+    font-size: 1.2rem;
+    color: white;
+    cursor: pointer;
+    opacity: 0;
+    animation: blink 1s infinite;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes blink {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0.4; }
+}
+
+/* Main content */
+#main-content {
+    display: none;
+    padding: 40px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
