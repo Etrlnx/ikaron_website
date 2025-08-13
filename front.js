@@ -1,27 +1,38 @@
-const pressEnter = document.getElementById("press-enter");
 const intro = document.getElementById("intro");
 const mainContent = document.getElementById("main-content");
+const pressEnter = document.getElementById("press-enter");
 
-// Hide "Press to Enter" initially
 pressEnter.style.display = "none";
 
-// Show it after 1 second
+// Show "Press anywhere to enter" after company name fade-in
 setTimeout(() => {
     pressEnter.style.display = "block";
-}, 1000);
+}, 2000);
 
+let hasEntered = false;
 function enterSite() {
-    intro.style.opacity = 0;
+    if (hasEntered) return;
+    hasEntered = true;
+
+    // Play zoom + rotate + fade out animation
+    intro.classList.add("zoom-animation");
+
+    // Wait for zoom (2.5s) + 0.5s delay before homepage fade in
     setTimeout(() => {
         intro.style.display = "none";
         mainContent.style.display = "block";
-        setTimeout(() => {
-            mainContent.style.opacity = 1;
-        }, 50);
+        mainContent.classList.add("fade-up");
         document.body.style.overflow = "auto";
-    }, 1000);
+    }, 3000); // 2.5s animation + 0.5s delay
 }
 
-// Click or key press to enter
-pressEnter.addEventListener("click", enterSite);
-document.addEventListener("keydown", enterSite);
+// Click anywhere on intro
+intro.addEventListener("click", enterSite);
+
+// Key press (Enter or Space)
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+        enterSite();
+    }
+});
+    
