@@ -1,6 +1,5 @@
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
     background: #000;
     color: white;
     overflow: hidden;
@@ -20,6 +19,50 @@ body {
     transition: opacity 1s ease;
     z-index: 10;
 }
+
+/* Loading pulse animation */
+@keyframes loadingPulse {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+}
+
+/* Apply loading animation before zoom */
+#intro.loading-animation {
+    animation: loadingPulse 2s ease-in-out;
+}
+
+/* Zoom + rotate + fade out animation */
+@keyframes zoomRotateFadeOut {
+    0% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(90) rotate(100deg);
+        opacity: 0;
+    }
+}
+#intro.zoom-animation {
+    animation: zoomRotateFadeOut 2.5s ease forwards;
+}
+
+
+/* Homepage fade-up animation */
+/* @keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.fade-up {
+    animation: fadeUp 2s ease forwards;
+}
+ */
+
 
 #company-name {
     font-size: 3rem;
@@ -45,17 +88,40 @@ body {
     color: white;
     cursor: pointer;
     opacity: 0;
-    animation: blink 1s infinite;
+    animation: fadeInText 1s ease forwards, blink 3.5s infinite;
+    animation-delay: 0s, 1s;
 }
+
+/* Fade in effect */
+@keyframes fadeInText {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes blink {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0.4; }
+}
+
 
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes blink {
-    0%, 50%, 100% { opacity: 1; }
-    25%, 75% { opacity: 0.4; }
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-up {
+    animation: fadeUp 2s ease forwards; /* Slower reveal */
 }
 
 /* Main content */
@@ -64,5 +130,64 @@ body {
     padding: 40px;
     text-align: center;
     opacity: 0;
-    transition: opacity 1s ease;
+}
+
+
+.center-box {
+    max-width: 600px;
+    margin: 100px auto; /* center horizontally + space from top */
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.05); /* subtle transparent box */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* light border */
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.center-box h1 {
+    margin-bottom: 15px;
+    font-size: 2rem;
+    color: white;
+}
+
+.center-box p {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+
+/* Navigation Bar */
+#navbar {
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    border-bottom: 1px solid white; /* White line under navbar */
+}
+
+#navbar ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+#navbar li {
+    display: inline;
+}
+
+#navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+#navbar a:hover {
+    color: #00aced; /* Light blue hover */
 }
